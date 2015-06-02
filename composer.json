@@ -1,0 +1,22 @@
+{
+    "name": "strong-squirrel/yii2-actions",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Kudinov",
+            "email": "frostealth@gmail.com",
+            "homepage": "http://frostealth.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4",
+        "yiisoft/yii2": "2.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "strong_squirrel\\actions\\": "src/"
+        }
+    }
+}
