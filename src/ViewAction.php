@@ -3,11 +3,11 @@
 namespace strong_squirrel\actions;
 
 /**
- * Class View
+ * Class ViewAction
  *
  * @package strong_squirrel\actions
  */
-class View extends Action
+class ViewAction extends Action
 {
     /**
      * @var string the name of the view action.

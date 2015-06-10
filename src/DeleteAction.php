@@ -5,11 +5,11 @@ namespace strong_squirrel\actions;
 use yii\web\ServerErrorHttpException;
 
 /**
- * Class Delete
+ * Class DeleteAction
  *
  * @package strong_squirrel\actions
  */
-class Delete extends Action
+class DeleteAction extends Action
 {
     /**
      * @var callable

@@ -5,11 +5,11 @@ namespace strong_squirrel\actions;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class Index
+ * Class IndexAction
  *
  * @package strong_squirrel\actions
  */
-class Index extends Action
+class IndexAction extends Action
 {
     /**
      * @var string the name of the view action.

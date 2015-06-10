@@ -5,11 +5,11 @@ namespace strong_squirrel\actions;
 use yii\db\ActiveRecord;
 
 /**
- * Class Create
+ * Class UpdateAction
  *
  * @package strong_squirrel\actions
  */
-class Create extends Action
+class UpdateAction extends Action
 {
     /**
      * @var string the scenario to be assigned to the new model before it is validated and saved.
@@ -19,7 +19,7 @@ class Create extends Action
     /**
      * @var string the name of the view action.
      */
-    public $view = 'create';
+    public $view = 'update';
 
     /**
      * @var callable
@@ -32,31 +32,32 @@ class Create extends Action
      * }
      * ```
      */
-    public $afterSave;
+    public $afterUpdate;
 
     /**
+     * @param string $id
+     *
      * @return mixed
+     * @throws \yii\web\NotFoundHttpException
      */
-    public function run()
+    public function run($id)
     {
+        /** @var ActiveRecord $model */
+        $model = $this->findModel($id);
+
         if ($this->checkAccess) {
-            call_user_func($this->checkAccess, $this->id);
+            call_user_func($this->checkAccess, $this->id, $model);
         }
 
-        /** @var ActiveRecord $model */
-        $model = new $this->modelClass([
-            'scenario' => $this->scenario,
-        ]);
-
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
-            $afterSave = $this->afterSave;
-            if (empty($afterSave)) {
-                $afterSave = function (ActiveRecord $model) {
+            $afterUpdate = $this->afterUpdate;
+            if (empty($afterUpdate)) {
+                $afterUpdate = function (ActiveRecord $model) {
                     return $this->controller->redirect(['view', 'id' => $model->getPrimaryKey()]);
                 };
             }
 
-            return call_user_func($afterSave, $model);
+            return call_user_func($afterUpdate, $model);
         }
 
         return $this->controller->render($this->view, ['model' => $model]);
