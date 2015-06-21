@@ -1,11 +1,11 @@
 <?php
 
-namespace strong_squirrel\actions;
+namespace strongsquirrel\actions;
 
 /**
  * Class ViewAction
  *
- * @package strong_squirrel\actions
+ * @package strongsquirrel\actions
  */
 class ViewAction extends Action
 {

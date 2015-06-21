@@ -1,13 +1,13 @@
 <?php
 
-namespace strong_squirrel\actions;
+namespace strongsquirrel\actions;
 
 use yii\web\ServerErrorHttpException;
 
 /**
  * Class DeleteAction
  *
- * @package strong_squirrel\actions
+ * @package strongsquirrel\actions
  */
 class DeleteAction extends Action
 {

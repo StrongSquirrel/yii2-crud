@@ -7,6 +7,11 @@
             "name": "Ivan Kudinov",
             "email": "frostealth@gmail.com",
             "homepage": "http://frostealth.ru"
+        },
+        {
+            "name": "Constantine Chuprik",
+            "email": "constantinchuprik@gmail.com",
+            "homepage": "http://chuprik.com"
         }
     ],
     "minimum-stability": "stable",
@@ -16,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "strong_squirrel\\actions\\": "src/"
+            "strongsquirrel\\actions\\": "src/"
         }
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace strong_squirrel\actions;
+namespace strongsquirrel\actions;
 
 use yii\data\ActiveDataProvider;
 
 /**
  * Class IndexAction
  *
- * @package strong_squirrel\actions
+ * @package strongsquirrel\actions
  */
 class IndexAction extends Action
 {

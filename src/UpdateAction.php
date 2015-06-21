@@ -1,13 +1,13 @@
 <?php
 
-namespace strong_squirrel\actions;
+namespace strongsquirrel\actions;
 
 use yii\db\ActiveRecord;
 
 /**
  * Class UpdateAction
  *
- * @package strong_squirrel\actions
+ * @package strongsquirrel\actions
  */
 class UpdateAction extends Action
 {
