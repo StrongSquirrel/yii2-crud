@@ -16,7 +16,6 @@ abstract class Action extends \yii\base\Action
     /**
      * @var string class name of the model which will be handled by this action.
      * The model class must implement [[ActiveRecordInterface]].
-     * This property must be set.
      */
     public $modelClass;
 
@@ -53,8 +52,9 @@ abstract class Action extends \yii\base\Action
      */
     public function init()
     {
-        if ($this->modelClass === null) {
-            throw new InvalidConfigException(get_class($this) . '::$modelClass must be set.');
+        if ($this->modelClass === null && $this->findModel === null) {
+            $className = get_class($this);
+            throw new InvalidConfigException("$className::\$modelClass or $className::\$findModel must be set.");
         }
     }
 
