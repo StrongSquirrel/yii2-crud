@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * Class IndexAction
  *
+ * @author Ivan Kudinov <frostealth@gmail.com>
  * @package strongsquirrel\actions
  */
 class IndexAction extends Action

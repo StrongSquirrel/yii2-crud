@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 /**
  * Class Action
  *
+ * @author Ivan Kudinov <frostealth@gmail.com>
  * @package strongsquirrel\actions
  */
 abstract class Action extends \yii\base\Action
