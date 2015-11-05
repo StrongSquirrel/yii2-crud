@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 /**
  * Class CreateAction
  *
+ * @author Ivan Kudinov <frostealth@gmail.com>
  * @package strongsquirrel\actions
  */
 class CreateAction extends Action

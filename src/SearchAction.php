@@ -9,12 +9,13 @@ use yii\base\Model;
 /**
  * Class SearchAction
  *
+ * @author Ivan Kudinov <frostealth@gmail.com>
  * @package strongsquirrel\actions
  */
 class SearchAction extends Action
 {
-    const HTTP_METHOD_GET = 'get';
-    const HTTP_METHOD_POST = 'post';
+    const FORM_METHOD_GET = 'get';
+    const FORM_METHOD_POST = 'post';
 
     /**
      * @var string
@@ -29,7 +30,7 @@ class SearchAction extends Action
     /**
      * @var string
      */
-    public $httpMethod = self::HTTP_METHOD_POST;
+    public $formMethod = self::FORM_METHOD_GET;
 
     /**
      * The method should return an instance of [[DataProviderInterface]].
@@ -96,10 +97,28 @@ class SearchAction extends Action
     {
         /** @var Model $model */
         $model = new $this->modelClass(['scenario' => $this->scenario]);
-
-        $data = call_user_func([\Yii::$app->request, $this->httpMethod]);
-        $model->load($data);
+        $model->load($this->getData());
 
         return [call_user_func([$model, $this->searchMethod], $this->searchOptions), $model];
+    }
+
+    /**
+     * @return array|null
+     */
+    protected function getData()
+    {
+        $request = \Yii::$app->request;
+        switch ($this->formMethod) {
+            case self::FORM_METHOD_GET:
+                $data = $request->get();
+                break;
+            case self::FORM_METHOD_POST:
+                $data = $request->post();
+                break;
+            default:
+                $data = null;
+        }
+
+        return $data;
     }
 }
