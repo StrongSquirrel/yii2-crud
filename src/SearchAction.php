@@ -104,6 +104,7 @@ class SearchAction extends Action
 
     /**
      * @return array|null
+     * @throws InvalidConfigException
      */
     protected function getData()
     {
@@ -116,7 +117,7 @@ class SearchAction extends Action
                 $data = $request->post();
                 break;
             default:
-                $data = null;
+                throw new InvalidConfigException('Unknown method "' . $this->formMethod . '"."');
         }
 
         return $data;
