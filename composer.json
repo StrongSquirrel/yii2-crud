@@ -1,5 +1,7 @@
 {
     "name": "strongsquirrel/yii2-actions",
+    "description": "CRUD actions extension for Yii2",
+    "keywords": ["yii2", "actions", "action", "crud"],
     "type": "yii2-extension",
     "license": "MIT",
     "authors": [
@@ -14,10 +16,9 @@
             "homepage": "http://chuprik.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4",
-        "yiisoft/yii2": "2.0.*"
+        "yiisoft/yii2": "~2.0"
     },
     "autoload": {
         "psr-4": {
