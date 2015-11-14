@@ -127,7 +127,7 @@ public function actions()
             'modelClass' => MyModel::className(),
             // 'findModel' => [$this, 'findModel'],
             // 'checkAccess' => [$this, 'checkAccess'],
-            // 'afterDelete' => [$this, 'onAfterSave'],
+            // 'afterDelete' => [$this, 'onAfterDelete'],
         ],
     ];
 }
@@ -172,7 +172,7 @@ use strongsquirrel\actions\SearchAction
 public function actions()
 {
     return [
-        'create' => [
+        'index' => [
             'class' => SearchAction::className(),
             'modelClass' => MySearchModel::className(),
             'scenario' => MySearchModel::SCENARIO_DEFAULT, // by default
