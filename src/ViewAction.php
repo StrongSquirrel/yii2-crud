@@ -5,7 +5,7 @@ namespace strongsquirrel\actions;
 /**
  * Class ViewAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class ViewAction extends Action

@@ -2,12 +2,12 @@
 
 namespace strongsquirrel\actions;
 
-use yii\db\ActiveRecord;
+use yii\db\BaseActiveRecord;
 
 /**
  * Class UpdateAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class UpdateAction extends Action
@@ -15,7 +15,7 @@ class UpdateAction extends Action
     /**
      * @var string the scenario to be assigned to the new model before it is validated and saved.
      */
-    public $scenario = ActiveRecord::SCENARIO_DEFAULT;
+    public $scenario = BaseActiveRecord::SCENARIO_DEFAULT;
 
     /**
      * @var string the name of the view action.
@@ -43,7 +43,7 @@ class UpdateAction extends Action
      */
     public function run($id)
     {
-        /** @var ActiveRecord $model */
+        /** @var BaseActiveRecord $model */
         $model = $this->findModel($id);
 
         if ($this->checkAccess) {
@@ -53,7 +53,7 @@ class UpdateAction extends Action
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
             $afterUpdate = $this->afterUpdate;
             if (empty($afterUpdate)) {
-                $afterUpdate = function (ActiveRecord $model) {
+                $afterUpdate = function (BaseActiveRecord $model) {
                     return $this->controller->redirect(['view', 'id' => $model->getPrimaryKey()]);
                 };
             }

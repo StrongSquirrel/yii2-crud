@@ -2,12 +2,12 @@
 
 namespace strongsquirrel\actions;
 
-use yii\db\ActiveRecord;
+use yii\db\BaseActiveRecord;
 
 /**
  * Class CreateAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class CreateAction extends Action
@@ -15,7 +15,7 @@ class CreateAction extends Action
     /**
      * @var string the scenario to be assigned to the new model before it is validated and saved.
      */
-    public $scenario = ActiveRecord::SCENARIO_DEFAULT;
+    public $scenario = BaseActiveRecord::SCENARIO_DEFAULT;
 
     /**
      * @var string the name of the view action.
@@ -44,7 +44,7 @@ class CreateAction extends Action
             call_user_func($this->checkAccess, $this->id);
         }
 
-        /** @var ActiveRecord $model */
+        /** @var BaseActiveRecord $model */
         $model = new $this->modelClass([
             'scenario' => $this->scenario,
         ]);
@@ -52,7 +52,7 @@ class CreateAction extends Action
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
             $afterSave = $this->afterSave;
             if (empty($afterSave)) {
-                $afterSave = function (ActiveRecord $model) {
+                $afterSave = function (BaseActiveRecord $model) {
                     return $this->controller->redirect(['view', 'id' => $model->getPrimaryKey()]);
                 };
             }

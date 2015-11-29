@@ -7,7 +7,7 @@ use yii\web\ServerErrorHttpException;
 /**
  * Class DeleteAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class DeleteAction extends Action

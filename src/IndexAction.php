@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * Class IndexAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class IndexAction extends Action
@@ -88,7 +88,7 @@ class IndexAction extends Action
             return call_user_func($this->prepareDataProvider, $this);
         }
 
-        /** @var \yii\db\ActiveRecord $modelClass */
+        /** @var \yii\db\ActiveRecordInterface $modelClass */
         $modelClass = $this->modelClass;
 
         return new ActiveDataProvider([

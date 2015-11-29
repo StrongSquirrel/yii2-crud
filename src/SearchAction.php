@@ -9,7 +9,7 @@ use yii\base\Model;
 /**
  * Class SearchAction
  *
- * @author Ivan Kudinov <frostealth@gmail.com>
+ * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\actions
  */
 class SearchAction extends Action
@@ -117,7 +117,7 @@ class SearchAction extends Action
                 $data = $request->post();
                 break;
             default:
-                throw new InvalidConfigException('Unknown method "' . $this->formMethod . '".');
+                throw new InvalidConfigException('Unsupported method "' . $this->formMethod . '".');
         }
 
         return $data;
