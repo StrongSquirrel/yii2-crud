@@ -53,7 +53,7 @@ public function actions()
 }
 ```
 
-View `index.php`:
+View file `index.php`:
 
 ```php
 echo GridView::widget([
@@ -84,7 +84,7 @@ public function actions()
 }
 ```
 
-View `create.php`:
+View file `create.php`:
 
 ```php
 $form = ActiveForm::begin();
@@ -115,7 +115,7 @@ public function actions()
 }
 ```
 
-`update.php`:
+View file `update.php`:
 
 ```php
 $form = ActiveForm::begin();
@@ -165,7 +165,7 @@ public function actions()
 }
 ```
 
-`view.php`:
+View file `view.php`:
 
 ```php
 echo DetailView::widget([
@@ -228,7 +228,7 @@ class MySearchModel extends Model
 }
 ```
 
-View `search.php`:
+View file `search.php`:
 
 ```php
 echo GridView::widget([
