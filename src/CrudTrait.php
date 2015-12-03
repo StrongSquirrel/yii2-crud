@@ -4,33 +4,33 @@ namespace strongsquirrel\crud;
 
 trait CrudTrait
 {
-    public function actionIndex()
+    public function actions()
     {
-        return \Yii::createObject(IndexAction::className(), ['index', $this])->run();
-    }
-
-    public function actionView()
-    {
-        return \Yii::createObject(ViewAction::className(), ['view', $this])->run();
-    }
-
-    public function actionCreate()
-    {
-        return \Yii::createObject(ViewAction::className(), ['create', $this])->run();
-    }
-
-    public function actionUpdate()
-    {
-        return \Yii::createObject(ViewAction::className(), ['update', $this])->run();
-    }
-
-    public function actionDelete()
-    {
-        return \Yii::createObject(ViewAction::className(), ['delete', $this])->run();
-    }
-
-    public function actionSearch()
-    {
-        return \Yii::createObject(ViewAction::className(), ['search', $this])->run();
+        return [
+            'index' => [
+                'class' => IndexAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+            'view' => [
+                'class' => ViewAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+            'create' => [
+                'class' => CreateAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+            'update' => [
+                'class' => UpdateAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+            'delete' => [
+                'class' => DeleteAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+            'search' => [
+                'class' => SearchAction::className(),
+                'modelClass' => $this->modelClass,
+            ],
+        ];
     }
 }

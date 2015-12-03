@@ -23,12 +23,25 @@ The extension has a base functional for creating CRUD with the following actions
 
 ### Simple way
 
-Just create controller and change a parent to `strongsquirrel\crud\CrudController` or use a special trait:
+Just create controller:
+
+```php
+use strongsquirrel\crud\CrudController;
+
+class AwesomeController extends CrudController
+{
+    public $modelClass = Model::class;
+}
+```
+
+or use a special trait:
 
 ```php
 class AwesomeController extends YourController
 {
    use strongsquirrel\crud\CrudTrait;
+
+   public $modelClass = Model::class;
 }
 ```
 
