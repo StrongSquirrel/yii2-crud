@@ -1,32 +1,43 @@
-# Yii2 Actions
+# Yii2 CRUD
 
-CRUD actions extension for Yii2.
+CRUD extension for Yii2.
 
 ## Installation
 
 Run the [Composer](http://getcomposer.org/download/) command to install the latest stable version:
 
 ```
-composer require strongsquirrel/yii2-actions @stable
+composer require strongsquirrel/yii2-crud @stable
 ```
 
-## Actions
+The extension has a base functional for creating CRUD with the following actions:
 
-* `IndexAction`
-* `CreateAction`
-* `UpdateAction`
-* `DeleteAction`
-* `ViewAction`
-* `SearchAction`
+* `index`: list of models
+* `create`: create a model
+* `update`: update a model
+* `delete`: delete a model
+* `view`: view a model
+* `search`: search models
 
 ## Usage
 
-### IndexAction
+### Simple way
 
-Just declare it in your controller:
+Just create controller and change a parent to `strongsquirrel\crud\CrudController` or use a special trait:
 
 ```php
-use strongsquirrel\actions\IndexAction;
+class AwesomeController extends YourController
+{
+   use strongsquirrel\crud\CrudTrait;
+}
+```
+
+### IndexAction
+
+Declare the following in your controller:
+
+```php
+use strongsquirrel\crud\IndexAction;
 
 public function actions()
 {
@@ -42,7 +53,7 @@ public function actions()
 }
 ```
 
-View:
+View `index.php`:
 
 ```php
 echo GridView::widget([
@@ -52,10 +63,10 @@ echo GridView::widget([
 
 ### CreateAction
 
-Just declare it in your controller:
+Declare the following in your controller:
 
 ```php
-use strongsquirrel\actions\CreateAction
+use strongsquirrel\crud\CreateAction
 
 public function actions()
 {
@@ -73,7 +84,7 @@ public function actions()
 }
 ```
 
-View:
+View `create.php`:
 
 ```php
 $form = ActiveForm::begin();
@@ -83,10 +94,10 @@ ActiveForm::end();
 
 ### UpdateAction
 
-Just declare it in your controller:
+Declare the following in your controller:
 
 ```php
-use strongsquirrel\actions\UpdateAction
+use strongsquirrel\crud\UpdateAction
 
 public function actions()
 {
@@ -104,7 +115,7 @@ public function actions()
 }
 ```
 
-View:
+`update.php`:
 
 ```php
 $form = ActiveForm::begin();
@@ -114,10 +125,10 @@ ActiveForm::end();
 
 ### DeleteAction
 
-Just declare it in your controller:
+Declare the following in your controller:
 
 ```php
-use strongsquirrel\actions\DeleteAction
+use strongsquirrel\crud\DeleteAction
 
 public function actions()
 {
@@ -135,10 +146,10 @@ public function actions()
 
 ### ViewAction
 
-Just declare it in your controller:
+Declare the following in your controller:
 
 ```php
-use strongsquirrel\actions\ViewAction
+use strongsquirrel\crud\ViewAction
 
 public function actions()
 {
@@ -154,7 +165,7 @@ public function actions()
 }
 ```
 
-View:
+`view.php`:
 
 ```php
 echo DetailView::widget([
@@ -164,10 +175,10 @@ echo DetailView::widget([
 
 ### SearchAction
 
-Just declare it in your controller:
+Declare the following in your controller:
 
 ```php
-use strongsquirrel\actions\SearchAction
+use strongsquirrel\crud\SearchAction
 
 public function actions()
 {
@@ -186,7 +197,7 @@ public function actions()
 }
 ```
 
-In your search model:
+Add search method to your class model:
 
 ```php
 class MySearchModel extends Model
@@ -217,7 +228,7 @@ class MySearchModel extends Model
 }
 ```
 
-View:
+View `search.php`:
 
 ```php
 echo GridView::widget([
@@ -229,4 +240,4 @@ echo GridView::widget([
 ## License
 
 The MIT License (MIT).
-See [LICENSE.md](https://github.com/StrongSquirrel/yii2-actions/blob/master/LICENSE.md) for more information.
+See [LICENSE.md](https://github.com/StrongSquirrel/yii2-crud/blob/master/LICENSE.md) for more information.

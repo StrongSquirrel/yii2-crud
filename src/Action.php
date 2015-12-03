@@ -1,6 +1,6 @@
 <?php
 
-namespace strongsquirrel\actions;
+namespace strongsquirrel\crud;
 
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecordInterface;
@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
  * Class Action
  *
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
- * @package strongsquirrel\actions
+ * @package strongsquirrel\crud
  */
 abstract class Action extends \yii\base\Action
 {

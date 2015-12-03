@@ -1,6 +1,6 @@
 <?php
 
-namespace strongsquirrel\actions;
+namespace strongsquirrel\crud;
 
 use yii\base\Action;
 use yii\base\InvalidConfigException;
@@ -10,7 +10,7 @@ use yii\base\Model;
  * Class SearchAction
  *
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
- * @package strongsquirrel\actions
+ * @package strongsquirrel\crud
  */
 class SearchAction extends Action
 {

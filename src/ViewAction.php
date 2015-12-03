@@ -1,12 +1,12 @@
 <?php
 
-namespace strongsquirrel\actions;
+namespace strongsquirrel\crud;
 
 /**
  * Class ViewAction
  *
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
- * @package strongsquirrel\actions
+ * @package strongsquirrel\crud
  */
 class ViewAction extends Action
 {

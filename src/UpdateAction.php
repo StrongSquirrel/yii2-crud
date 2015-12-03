@@ -1,6 +1,6 @@
 <?php
 
-namespace strongsquirrel\actions;
+namespace strongsquirrel\crud;
 
 use yii\db\BaseActiveRecord;
 
@@ -8,7 +8,7 @@ use yii\db\BaseActiveRecord;
  * Class UpdateAction
  *
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
- * @package strongsquirrel\actions
+ * @package strongsquirrel\crud
  */
 class UpdateAction extends Action
 {

@@ -1,6 +1,6 @@
 {
-    "name": "strongsquirrel/yii2-actions",
-    "description": "CRUD actions extension for Yii2",
+    "name": "strongsquirrel/yii2-crud",
+    "description": "CRUD extension for Yii2",
     "keywords": ["yii2", "actions", "action", "crud"],
     "type": "yii2-extension",
     "license": "MIT",
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "strongsquirrel\\actions\\": "src/"
+            "strongsquirrel\\crud\\": "src/"
         }
     }
 }
