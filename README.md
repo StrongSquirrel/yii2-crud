@@ -250,6 +250,42 @@ echo GridView::widget([
 ]);
 ```
 
+## Recipes
+
+#### Changing CrudTrait actions
+
+```php
+namespace app\controllers;
+
+use app\models\News;
+use strongsquirrel\crud\CrudTrait;
+
+class NewsController extends Controller
+{
+    use CrudTrait {
+        actions as traitActions;
+    }
+
+    public $modelClass = News::class;
+
+    public function actions()
+    {
+        $actions = $this->traitActions();
+
+        unset($actions['view']);
+        unset($actions['update']);
+        unset($actions['delete']);
+        unset($actions['search']);
+
+        $actions['create']['afterSave'] = function () {
+            return $this->redirect('index');
+        };
+
+        return $actions;
+    }
+}
+```
+
 ## License
 
 The MIT License (MIT).
