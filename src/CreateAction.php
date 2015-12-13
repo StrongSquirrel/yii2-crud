@@ -10,13 +10,8 @@ use yii\db\BaseActiveRecord;
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\crud
  */
-class CreateAction extends Action
+class CreateAction extends ItemAction
 {
-    /**
-     * @var string the scenario to be assigned to the new model before it is validated and saved.
-     */
-    public $scenario = BaseActiveRecord::SCENARIO_DEFAULT;
-
     /**
      * @var string the name of the view action.
      */
@@ -40,14 +35,11 @@ class CreateAction extends Action
      */
     public function run()
     {
-        if ($this->checkAccess) {
-            call_user_func($this->checkAccess, $this->id);
-        }
+        $this->checkAccess();
 
         /** @var BaseActiveRecord $model */
-        $model = new $this->modelClass([
-            'scenario' => $this->scenario,
-        ]);
+        $model = \Yii::createObject($this->modelClass);
+        $model->setScenario($this->scenario);
 
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
             $afterSave = $this->afterSave;
@@ -60,6 +52,8 @@ class CreateAction extends Action
             return call_user_func($afterSave, $model);
         }
 
-        return $this->controller->render($this->view, ['model' => $model]);
+        $params = $this->resolveParams(['model' => $model]);
+
+        return $this->controller->render($this->view, $params);
     }
 }

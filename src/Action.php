@@ -3,8 +3,7 @@
 namespace strongsquirrel\crud;
 
 use yii\base\InvalidConfigException;
-use yii\db\ActiveRecordInterface;
-use yii\web\NotFoundHttpException;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Action
@@ -22,21 +21,6 @@ abstract class Action extends \yii\base\Action
 
     /**
      * @var callable
-     * The signature of the callable should be:
-     *
-     * ```php
-     * function ($id, $action) {
-     *     // $id is the primary key value.
-     *     // $action is the action object currently running
-     * }
-     * ```
-     *
-     * The callable should return the model found, or throw an exception if not found.
-     */
-    public $findModel;
-
-    /**
-     * @var callable
      * The signature of the callable should be as follows,
      *
      * ```php
@@ -49,36 +33,81 @@ abstract class Action extends \yii\base\Action
     public $checkAccess;
 
     /**
-     * @inheritdoc
+     * The additional parameters that should be made available in the view.
+     * The signature of the callable should be as follows,
+     *
+     * ```php
+     * function ($action, $model = null) {
+     *     // $model is the requested model instance.
+     *     // If null, it means no specific model (e.g. IndexAction)
+     * }
+     * ```
+     *
+     * or array
+     *
+     * ```php
+     * [
+     *     'cities' => function () {
+     *         return City::findAll();
+     *     },
+     *     'isGuest' => Yii::$app->user->isGuest,
+     * ];
+     * ```
+     *
+     * @var array|callable
+     */
+    public $params = [];
+
+    /**
+     * Initializes the object.
+     * This method is invoked at the end of the constructor after the object is initialized with the
+     * given configuration.
+     *
+     * @throws InvalidConfigException
      */
     public function init()
     {
-        if ($this->modelClass === null && $this->findModel === null) {
+        if (!is_array($this->params) && !is_callable($this->params)) {
             $className = get_class($this);
-            throw new InvalidConfigException("$className::\$modelClass or $className::\$findModel must be set.");
+            throw new InvalidConfigException("$className::\$params must be an array or a callable.");
+        }
+
+        if ($this->checkAccess !== null && !is_callable($this->checkAccess)) {
+            $className = get_class($this);
+            throw new InvalidConfigException("$className::\$checkAccess must be a callable");
         }
     }
 
     /**
-     * @param string $id
-     *
-     * @return ActiveRecordInterface
-     * @throws NotFoundHttpException
+     * @param mixed $model
      */
-    public function findModel($id)
+    protected function checkAccess($model = null)
     {
-        if ($this->findModel !== null) {
-            $model = call_user_func($this->findModel, $id, $this);
-        } else {
-            /** @var ActiveRecordInterface $modelClass */
-            $modelClass = $this->modelClass;
-            $model = $modelClass::findOne($id);
+        if (is_callable($this->checkAccess)) {
+            call_user_func($this->checkAccess, $this->id, $model);
+        }
+    }
+
+    /**
+     * @param array  $params
+     * @param mixed  $model
+     *
+     * @return array
+     */
+    protected function resolveParams(array $params, $model = null)
+    {
+        $result = $this->params;
+        if (is_callable($result)) {
+            $result = call_user_func($result, $this->id, $model);
         }
 
-        if (empty($model)) {
-            throw new NotFoundHttpException('Object not found.');
+        foreach ($result as &$value) {
+            if (is_callable($value)) {
+                $value = call_user_func($value, $this->id, $model);
+            }
         }
 
-        return $model;
+
+        return ArrayHelper::merge($result, $params);
     }
 }

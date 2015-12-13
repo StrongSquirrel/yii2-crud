@@ -286,6 +286,66 @@ class NewsController extends Controller
 }
 ```
 
+#### Additional parameters in the view
+
+```php
+namespace app\controllers;
+
+use app\models\City;
+use app\models\User;
+use strongsquirrel\crud\UpdateAction;
+use strongsquirrel\crud\ViewAction;
+
+class UsersController extends Controller
+{
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'update' => [
+                'class' => UpdateAction::className(),
+                'modelClass' => User::className(),
+                'params' => [
+                    'cities' => [$this, 'getCities'],
+                    'title' => 'Update User',
+                ],
+            ],
+            'view' => [
+                'class' => ViewAction::className(),
+                'modelClass' => User::className(),
+                'params' => [$this, 'getViewParams'],
+            ],
+        ];
+    }
+    
+    /**
+     * @return City[]
+     */
+    public function getCities()
+    {
+        return City::findAll();
+    }
+    
+    /**
+     * @param User $model
+     * 
+     * @return array
+     */
+    public function getViewParams(User $model)
+    {
+        return [
+            'posts' => function (User $model) {
+                return $model->posts;
+            },
+            'city' => $model->city,
+            'cities' => [$this, 'getCities'],
+        ];
+    }
+}
+```
+
 ## License
 
 The MIT License (MIT).
