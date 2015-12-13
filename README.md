@@ -286,7 +286,7 @@ class NewsController extends Controller
 }
 ```
 
-#### Additional parameters in the view
+#### Additional parameters in view
 
 ```php
 namespace app\controllers;
@@ -315,7 +315,15 @@ class UsersController extends Controller
             'view' => [
                 'class' => ViewAction::className(),
                 'modelClass' => User::className(),
-                'params' => [$this, 'getViewParams'],
+                'params' => function (User $model) {
+                    return [
+                        'posts' => function (User $model) {
+                            return $model->posts;
+                        },
+                        'city' => $model->city,
+                        'cities' => [$this, 'getCities'],
+                    ];
+                },
             ],
         ];
     }
@@ -326,22 +334,6 @@ class UsersController extends Controller
     public function getCities()
     {
         return City::findAll();
-    }
-    
-    /**
-     * @param User $model
-     * 
-     * @return array
-     */
-    public function getViewParams(User $model)
-    {
-        return [
-            'posts' => function (User $model) {
-                return $model->posts;
-            },
-            'city' => $model->city,
-            'cities' => [$this, 'getCities'],
-        ];
     }
 }
 ```
