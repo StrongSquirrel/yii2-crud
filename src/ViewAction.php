@@ -8,7 +8,7 @@ namespace strongsquirrel\crud;
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\crud
  */
-class ViewAction extends Action
+class ViewAction extends ItemAction
 {
     /**
      * @var string the name of the view action.
@@ -24,11 +24,10 @@ class ViewAction extends Action
     public function run($id)
     {
         $model = $this->findModel($id);
+        $this->checkAccess($model);
 
-        if ($this->checkAccess) {
-            call_user_func($this->checkAccess, $this->id, $model);
-        }
+        $params = $this->resolveParams(['model' => $model]);
 
-        return $this->controller->render($this->view, ['model' => $model]);
+        return $this->controller->render($this->view, $params);
     }
 }

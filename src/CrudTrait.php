@@ -2,8 +2,16 @@
 
 namespace strongsquirrel\crud;
 
+/**
+ * Trait CrudTrait
+ *
+ * @package strongsquirrel\crud
+ */
 trait CrudTrait
 {
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [

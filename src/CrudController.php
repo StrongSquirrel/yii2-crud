@@ -4,10 +4,19 @@ namespace strongsquirrel\crud;
 
 use yii\web\Controller;
 
+/**
+ * Class CrudController
+ *
+ * @package strongsquirrel\crud
+ */
 class CrudController extends Controller
 {
+    /** @var string */
     public $modelClass;
 
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [

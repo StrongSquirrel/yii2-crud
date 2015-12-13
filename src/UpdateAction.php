@@ -10,13 +10,8 @@ use yii\db\BaseActiveRecord;
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\crud
  */
-class UpdateAction extends Action
+class UpdateAction extends ItemAction
 {
-    /**
-     * @var string the scenario to be assigned to the new model before it is validated and saved.
-     */
-    public $scenario = BaseActiveRecord::SCENARIO_DEFAULT;
-
     /**
      * @var string the name of the view action.
      */
@@ -45,10 +40,7 @@ class UpdateAction extends Action
     {
         /** @var BaseActiveRecord $model */
         $model = $this->findModel($id);
-
-        if ($this->checkAccess) {
-            call_user_func($this->checkAccess, $this->id, $model);
-        }
+        $this->checkAccess($model);
 
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
             $afterUpdate = $this->afterUpdate;
@@ -61,6 +53,8 @@ class UpdateAction extends Action
             return call_user_func($afterUpdate, $model);
         }
 
-        return $this->controller->render($this->view, ['model' => $model]);
+        $params = $this->resolveParams(['model' => $model]);
+
+        return $this->controller->render($this->view, $params);
     }
 }

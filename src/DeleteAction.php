@@ -10,7 +10,7 @@ use yii\web\ServerErrorHttpException;
  * @author Ivan Kudinov <i.kudinov@frostealth.ru>
  * @package strongsquirrel\crud
  */
-class DeleteAction extends Action
+class DeleteAction extends ItemAction
 {
     /**
      * @var callable
@@ -35,10 +35,7 @@ class DeleteAction extends Action
     public function run($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->checkAccess) {
-            call_user_func($this->checkAccess, $this->id, $model);
-        }
+        $this->checkAccess($model);
 
         if ($model->delete() === false) {
             throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');
