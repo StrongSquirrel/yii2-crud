@@ -41,6 +41,7 @@ class UpdateAction extends ItemAction
         /** @var BaseActiveRecord $model */
         $model = $this->findModel($id);
         $this->checkAccess($model);
+        $model->setScenario($this->scenario);
 
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
             $afterUpdate = $this->afterUpdate;
